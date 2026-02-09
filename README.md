@@ -1,44 +1,44 @@
-# LOST INN GYM Web Site
+# LOST INN GYM Web Sitesi
 
-Modern, responsive, and aesthetic website for LOST INN GYM.
+LOST INN GYM için modern, duyarlı (responsive) ve estetik web sitesi.
 
-![Lost Inn Gym Preview](logo.png)
+![Lost Inn Gym Önizleme](logo.png)
 
-## 🌟 Features
+## 🌟 Özellikler
 
-- **Modern Design:** Dark mode aesthetics with vibrant red accents (`#DC143C`).
-- **Responsive:** Fully responsive design that works perfectly on Desktop, Tablet, and Mobile.
-- **Single Page Application (SPA) Feel:** Smooth transitions between sections without page reloads.
-- **Interactive Gallery:** High-quality image gallery with hover effects.
-- **WhatsApp Integration:** Direct floating button to chat with the gym on WhatsApp.
-- **Membership Plans:** Clear and pricing tables for membership options.
+- **Modern Tasarım:** Canlı kırmızı vurgular (`#DC143C`) ile karanlık mod estetiği.
+- **Tam Uyumlu (Responsive):** Masaüstü, Tablet ve Mobil cihazlarda mükemmel çalışan tasarım.
+- **Tek Sayfa Uygulaması (SPA) Hissi:** Sayfa yenilenmeden bölümler arasında yumuşak geçişler.
+- **İnteraktif Galeri:** Hover efektlerine sahip yüksek kaliteli resim galerisi.
+- **WhatsApp Entegrasyonu:** Spor salonuyla doğrudan WhatsApp üzerinden sohbet etmek için kayan buton.
+- **Üyelik Paketleri:** Üyelik seçenekleri için net fiyatlandırma tablosu.
 
-## 🛠️ Technologies Used
+## 🛠️ Kullanılan Teknolojiler
 
-- **HTML5:** Semantic structure.
-- **CSS3:** Custom properties (variables), Flexbox, Grid, Animations.
-- **JavaScript (Vanilla):** For navigation logic, scroll effects, and mobile menu interaction.
-- **Font Awesome / SVG:** Used for icons.
+- **HTML5:** Semantik yapı.
+- **CSS3:** Özel özellikler (değişkenler), Flexbox, Grid, Animasyonlar.
+- **JavaScript (Vanilla):** Navigasyon mantığı, kaydırma efektleri ve mobil menü etkileşimi için.
+- **Font Awesome / SVG:** İkonlar için kullanıldı.
 
-## 🚀 How to View
+## 🚀 Canlı Önizleme
 
-You can view the live site here: [Link to GitHub Pages](https://yasinbba.github.io/LostInnGym_WebSite/)
-*(Note: Ensure GitHub Pages is enabled in repository settings)*
+Siteyi buradan canlı olarak görüntüleyebilirsiniz: [GitHub Pages Bağlantısı](https://yasinbba.github.io/LostInnGym_WebSite/)
+*(Not: GitHub Pages'in depo ayarlarından etkinleştirildiğinden emin olun)*
 
-## 📂 Project Structure
+## 📂 Proje Yapısı
 
 ```
 LostInnGym_WebSite/
-├── index.html        # Main HTML file (contains CSS & JS)
-└── logo.png          # Source logo file (embedded as Base64 in HTML)
+├── index.html        # Ana HTML dosyası (CSS & JS içerir)
+└── logo.png          # Kaynak logo dosyası (HTML içinde Base64 olarak gömülüdür)
 ```
 
-## 📱 Contact
+## 📱 İletişim
 
-- **Address:** Gençlik, Işıklar Cd. No 42, Antalya, Türkiye
-- **Phone:** +90 (532) 379 81 48
-- **Email:** info@lostinnotel.com.tr
+- **Adres:** Gençlik, Işıklar Cd. No 42, Antalya, Türkiye
+- **Telefon:** +90 (532) 379 81 48
+- **E-Posta:** info@lostinnotel.com.tr
 - **Instagram:** [@lostinngym](https://www.instagram.com/lostinngym/)
 
 ---
-© 2026 LOST INN GYM. All rights reserved.
+© 2026 LOST INN GYM. Tüm hakları saklıdır.
