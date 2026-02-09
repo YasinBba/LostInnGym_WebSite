@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOST INN GYM - Gücünü Keşfet</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #DC143C;
+            --secondary-red: #8B0000;
+            --accent-red: #FF2442;
+            --pure-black: #000000;
+            --dark-gray: #0a0a0a;
+            --medium-gray: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --white: #ffffff;
+            --text-gray: #b8b8b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--pure-black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(220, 20, 60, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(220, 20, 60, 0.3);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent-red), var(--primary-red), var(--secondary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Pages Container */
+        .page {
+            min-height: 100vh;
+            display: none;
+            opacity: 0;
+            animation: fadeInPage 0.6s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeInPage {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--pure-black) 0%, var(--secondary-red) 100%);
+            opacity: 0.9;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(220, 20, 60, 0.03) 35px, rgba(220, 20, 60, 0.03) 70px);
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+
+            100% {
+                transform: translateX(70px) translateY(70px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            background: linear-gradient(180deg, var(--white) 0%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroTitle 1s ease-out;
+        }
+
+        @keyframes heroTitle {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--text-gray);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            animation: heroSubtitle 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes heroSubtitle {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+            background: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid var(--primary-red);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: heroButton 1s ease-out 0.6s backwards;
+        }
+
+        @keyframes heroButton {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: left 0.3s ease;
+        }
+
+        .cta-button:hover {
+            color: var(--primary-red);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* About Section */
+        .about-page {
+            padding: 8rem 5% 5rem;
+            background: var(--dark-gray);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: 6px;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: var(--medium-gray);
+            padding: 3rem;
+            border-left: 4px solid var(--primary-red);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent-red);
+            transition: height 0.3s ease;
+        }
+
+        .about-card:hover::before {
+            height: 100%;
+        }
+
+        .about-card:hover {
+            transform: translateX(10px);
+            background: var(--light-gray);
+        }
+
+        .about-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-red);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .about-card p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+
+        /* Services Section */
+        .services-page {
+            padding: 8rem 5% 5rem;
+            background: linear-gradient(180deg, var(--dark-gray) 0%, var(--pure-black) 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--medium-gray);
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(220, 20, 60, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-red), var(--secondary-red));
+            transition: top 0.4s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            top: 0;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-red);
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2);
+        }
+
+        .service-card h3 {
+            position: relative;
+            z-index: 1;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .service-card p {
+            position: relative;
+            z-index: 1;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .service-card:hover p {
+            color: var(--white);
+        }
+
+        /* Pricing Section */
+        .pricing-page {
+            padding: 8rem 5% 5rem;
+            background: var(--pure-black);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--medium-gray);
+            border: 2px solid var(--light-gray);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, var(--secondary-red), var(--pure-black));
+            border-color: var(--primary-red);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-red);
+            box-shadow: 0 20px 40px rgba(220, 20, 60, 0.4);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pricing-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-period {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--text-gray);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--primary-red);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid var(--primary-red);
+            transition: all 0.3s ease;
+        }
+
+        .pricing-button:hover {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        /* Gallery Section */
+        .gallery-page {
+            padding: 8rem 5% 5rem;
+            background: var(--dark-gray);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-red));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.8;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            opacity: 1;
+            /* Always visible */
+            background: rgba(0, 0, 0, 0.4);
+            /* Darker background for readability */
+            transition: background 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            background: rgba(220, 20, 60, 0.6);
+            /* Red tint on hover */
+        }
+
+        .gallery-overlay-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Contact Section */
+        .contact-page {
+            padding: 8rem 5% 5rem;
+            background: var(--pure-black);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 1.5rem;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            min-width: 60px;
+        }
+
+        .contact-details h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .contact-details p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-family: 'Oswald', sans-serif;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--medium-gray);
+            border: 1px solid var(--light-gray);
+            color: var(--white);
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            background: var(--light-gray);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            padding: 1.2rem;
+            background: var(--primary-red);
+            color: var(--white);
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--secondary-red);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 20, 60, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--pure-black);
+            padding: 3rem 5%;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-red);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Image Logo */
+        .nav-logo {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-logo img {
+            max-height: 60px;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-logo" onclick="navigateToPage('home')">
+            <img src="logo.png" alt="LOST INN GYM">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-page="home">Ana Sayfa</a></li>
+            <li><a href="#" class="nav-link" data-page="about">Hakkımızda</a></li>
+            <li><a href="#" class="nav-link" data-page="services">Hizmetler</a></li>
+            <li><a href="#" class="nav-link" data-page="pricing">Üyelik</a></li>
+            <li><a href="#" class="nav-link" data-page="gallery">Galeri</a></li>
+            <li><a href="#" class="nav-link" data-page="contact">İletişim</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div class="page active" id="home">
+        <section class="hero">
+            <div class="hero-background"></div>
+            <div class="hero-pattern"></div>
+            <div class="hero-content">
+                <h1>LOST INN GYM</h1>
+                <p class="hero-subtitle">Gücünü Keşfet • Sınırlarını Zorla • Zaferini Yakala</p>
+                <a href="#" class="cta-button" onclick="navigateToPage('pricing'); return false;">
+                    <span>ÜYE OL</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div class="page" id="about">
+        <section class="about-page">
+            <div class="section-header">
+                <h2 class="section-title">Hakkımızda</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>Misyonumuz</h3>
+                    <p>LOST INN GYM olarak, her bireyin içindeki gücü ortaya çıkarması için ilham verici bir ortam
+                        yaratıyoruz. Fitness yolculuğunuzda size rehberlik eden, motivasyon kaynağı olan ve
+                        hedeflerinize ulaşmanız için gereken tüm imkanları sunan bir topluluk oluşturuyoruz.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Vizyonumuz</h3>
+                    <p>Modern spor bilimi ve teknolojisini birleştirerek, her seviyeden sporcuya en kaliteli antrenman
+                        deneyimini sunmayı hedefliyoruz. Sadece bir spor salonu değil, yaşam tarzınızı dönüştüren bir
+                        topluluk olmak için çalışıyoruz.</p>
+                </div>
+                <div class="about-card">
+                    <h3>Değerlerimiz</h3>
+                    <p>Kararlılık, tutku ve sürekli gelişim ilkelerimizdir. Her üyemizin kişisel hedeflerine saygı
+                        duyar, profesyonel eğitmenlerimiz ve son teknoloji ekipmanlarımızla onları destekleriz. Burada
+                        herkes kendini güvende ve motive hisseder.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Page -->
+    <div class="page" id="services">
+        <section class="services-page">
+            <div class="section-header">
+                <h2 class="section-title">Hizmetlerimiz</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏋️</div>
+                    <h3>Ağırlık Antrenmanı</h3>
+                    <p>Profesyonel ekipmanlar ve uzman eğitmenlerle kas kütlenizi artırın, gücünüzü geliştirin.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏃</div>
+                    <h3>Kardio Programları</h3>
+                    <p>Modern kardiyo ekipmanları ile dayanıklılığınızı artırın ve kalp sağlığınızı güçlendirin.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👤</div>
+                    <h3>Kişisel Antrenörlük</h3>
+                    <p>Size özel hazırlanan programlar ve birebir eğitmenlik desteği ile hedeflerinize ulaşın.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🍎</div>
+                    <h3>Beslenme Danışmanlığı</h3>
+                    <p>Uzman diyetisyenlerimizden kişiye özel beslenme programları alın.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💪</div>
+                    <h3>Fonksiyonel Antrenman</h3>
+                    <p>Günlük hayatınızı kolaylaştıran, performansınızı artıran fonksiyonel egzersizler.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pricing Page -->
+    <div class="page" id="pricing">
+        <section class="pricing-page">
+            <div class="section-header">
+                <h2 class="section-title">Üyelik Paketleri</h2>
+            </div>
+            <div class="pricing-grid">
+                <!-- 1 Month -->
+                <div class="pricing-card">
+                    <h3>1 Aylık</h3>
+                    <div class="price">₺3000</div>
+                    <div class="price-period">Tek Çekim</div>
+                    <ul class="pricing-features">
+                        <li>Antrenör Desteği</li>
+                        <li>Hamam & Sauna</li>
+                        <li>Buhar Odası Kullanımı</li>
+                        <li>Wi-Fi</li>
+                        <li>Soyunma Odası & Duş</li>
+                    </ul>
+                    <a href="https://wa.me/905457349813?text=Merhaba,%201%20aylık%20üyelik%20paketi%20hakkında%20bilgi%20almak%20istiyorum."
+                        class="pricing-button" target="_blank">Paketi Seç</a>
+                </div>
+
+                <!-- 3 Months -->
+                <div class="pricing-card">
+                    <h3>3 Aylık</h3>
+                    <div class="price">₺7900</div>
+                    <div class="price-period">Tek Çekim</div>
+                    <ul class="pricing-features">
+                        <li>Antrenör Desteği</li>
+                        <li>Hamam & Sauna</li>
+                        <li>Buhar Odası Kullanımı</li>
+                        <li>Wi-Fi</li>
+                        <li>Soyunma Odası & Duş</li>
+                    </ul>
+                    <a href="https://wa.me/905457349813?text=Merhaba,%203%20aylık%20üyelik%20paketi%20hakkında%20bilgi%20almak%20istiyorum."
+                        class="pricing-button" target="_blank">Paketi Seç</a>
+                </div>
+
+                <!-- 6 Months -->
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">POPÜLER</div>
+                    <h3>6 Aylık</h3>
+                    <div class="price">₺12000</div>
+                    <div class="price-period">Tek Çekim</div>
+                    <ul class="pricing-features">
+                        <li>Antrenör Desteği</li>
+                        <li>Hamam & Sauna</li>
+                        <li>Buhar Odası Kullanımı</li>
+                        <li>Wi-Fi</li>
+                        <li>Soyunma Odası & Duş</li>
+                    </ul>
+                    <a href="https://wa.me/905457349813?text=Merhaba,%206%20aylık%20üyelik%20paketi%20hakkında%20bilgi%20almak%20istiyorum."
+                        class="pricing-button" target="_blank">Paketi Seç</a>
+                </div>
+
+                <!-- 12 Months -->
+                <div class="pricing-card">
+                    <h3>12 Aylık</h3>
+                    <div class="price">₺18000</div>
+                    <div class="price-period">Tek Çekim</div>
+                    <ul class="pricing-features">
+                        <li>Antrenör Desteği</li>
+                        <li>Hamam & Sauna</li>
+                        <li>Buhar Odası Kullanımı</li>
+                        <li>Wi-Fi</li>
+                        <li>Soyunma Odası & Duş</li>
+                    </ul>
+                    <a href="https://wa.me/905457349813?text=Merhaba,%2012%20aylık%20üyelik%20paketi%20hakkında%20bilgi%20almak%20istiyorum."
+                        class="pricing-button" target="_blank">Paketi Seç</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div class="page" id="gallery">
+        <section class="gallery-page">
+            <div class="section-header">
+                <h2 class="section-title">Galeri</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">Ağırlık Salonu</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">Kardio Alanı</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">Grup Ders Stüdyosu</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">Fonksiyonel Alan</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">Sauna & Hamam</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-overlay">
+                        <span class="gallery-overlay-text">VIP Lounge</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="page" id="contact">
+        <section class="contact-page">
+            <div class="section-header">
+                <h2 class="section-title">İletişim</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h3>Adres</h3>
+                            <p> Gençlik, Işıklar Cd. No 42<br>Antalya, Türkiye</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <p>+90 (532) 379 81 48<br>+90 (545) 734 98 13</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h3>E-Posta</h3>
+                            <p>info@lostinnotel.com.tr</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div class="contact-details">
+                            <h3>Çalışma Saatleri</h3>
+                            <p>Pazartesi - Cumartesi: 09:00 - 21:30<br>Pazar: 15:30 - 21:30</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label>Adınız Soyadınız</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Posta</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <input type="tel" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mesajınız</label>
+                        <textarea required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Gönder</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.instagram.com/lostinngym/" class="social-icon" aria-label="Instagram"
+                    target="_blank">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">© 2026 LOST INN GYM. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
+        const navbar = document.getElementById('navbar');
+
+        function navigateToPage(pageName) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const selectedPage = document.getElementById(pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Update active nav link
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageName) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Nav link click handlers
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageName = link.getAttribute('data-page');
+                navigateToPage(pageName);
+            });
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Form submission handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Mesajınız alındı! En kısa sürede size dönüş yapacağız.');
+            e.target.reset();
+        }
+
+        // Smooth reveal animations on page load
+        window.addEventListener('load', () => {
+            const activePage = document.querySelector('.page.active');
+            if (activePage) {
+                activePage.style.opacity = '0';
+                setTimeout(() => {
+                    activePage.style.opacity = '1';
+                }, 100);
+            }
+        });
+    </script>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/905457349813" class="whatsapp-float" target="_blank" title="WhatsApp ile İletişime Geç">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.304-5.291c0-5.435 4.418-9.85 9.869-9.85 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.429-4.421 9.851-9.872 9.851M12.052 2.768a9.845 9.845 0 017.021 2.923 9.92 9.92 0 012.9 7.042c.005 5.488-4.446 9.97-9.927 9.97-1.857 0-3.619-.534-5.114-1.465l-5.65 1.488 1.503-5.48a9.865 9.865 0 01-1.442-5.074C1.348 6.671 6.134 1.896 12.052 2.768z">
+            </path>
+        </svg>
+    </a>
+</body>
+
+</html>
